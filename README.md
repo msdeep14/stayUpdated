@@ -14,4 +14,6 @@ get latest updates through SMS from aitplacements.com
   4. sched
   5. cookielib, urllib
   6. sinchsms : get app_key and app_secret by registering app at [https://www.sinch.com/](https://www.sinch.com/)
+  
+  There is no extra dependency for sending SMS through way2sms, you just need to register on way2sms portal.
 
