@@ -32,7 +32,8 @@ def sendSMS(inset):
     message2 = ''
     inlistLen = len(inlist)
     for i in range(2):
-        message2 = message2 + '\n' + str(inlist[i].encode('utf-8'))   
+        if i < inlistLen:
+            message2 = message2 + '\n' + str(inlist[i].encode('utf-8'))   
 
     
     for number in numberlist:
