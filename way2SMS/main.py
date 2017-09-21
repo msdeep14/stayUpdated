@@ -40,6 +40,9 @@ def sendSMS(inset):
         cj = cookielib.CookieJar()
         opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
 
+        # way2sms limitations:
+        # 140 chars per msg
+        # 100 free msgs per day
         login_data = 'username=' + username + '&password=' + password + '&Submit=Sign+in'
         opener.open('http://site24.way2sms.com/Login1.action?', login_data)
 
