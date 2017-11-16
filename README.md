@@ -2,7 +2,7 @@
 get latest updates through SMS from aitplacements.com
 
 ## Installation
-  1. Clone the repo : git clone https://github.com/msdeep14/stayUpdated.git
+  1. Clone or fork the repo : git clone https://github.com/msdeep14/stayUpdated.git
   2. Edit username, password, mobile number, app key, app secret in main.py
   3. Set delay time according to your need (current delay = 5sec)
   4. Execute in terminal : python main.py
