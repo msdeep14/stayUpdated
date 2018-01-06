@@ -1,5 +1,5 @@
 # stayUpdated
-get latest updates through SMS from aitplacements.com
+fetch latest updates from http://aitplacements.com/ and receive updates through mobile SMS and desktop notification
 
 ## Installation
 
@@ -15,6 +15,7 @@ get latest updates through SMS from aitplacements.com
   4. sched
   5. cookielib, urllib
   6. sinchsms : get app_key and app_secret by registering app at [https://www.sinch.com/](https://www.sinch.com/)
+  7. notify2
   
   There is no extra dependency for sending SMS through way2sms, you just need to register on way2sms portal.
 
