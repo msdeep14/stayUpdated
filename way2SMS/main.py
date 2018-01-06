@@ -4,6 +4,7 @@ from lxml import html
 import time
 from time import sleep
 import sched
+import notify2
 
 # set your credentials
 # username is mobile number
@@ -20,22 +21,26 @@ delay = 5
 
 # add mobile numbers to this list to whom
 # you want to send SMS
-numberlist = ['7798xxxxxx','7030xxxxxx']
+numberlist = ['7798xxxxxx']
 
 # global list for storing updates
 titlelist = []
 
 s = sched.scheduler(time.time, time.sleep)
 
-def sendSMS(inset):
-    inlist = list(inset)
-    message2 = ''
-    inlistLen = len(inlist)
-    for i in range(2):
-        if i < inlistLen:
-            message2 = message2 + '\n' + str(inlist[i].encode('utf-8'))   
 
-    
+# send desktop notification in case of any update
+def desktopNotify(message2):
+    print("sending desktop Notification")
+    notify2.init("updateNotifier")
+
+    n = notify2.Notification('Updates from aitplacements.com',message2)
+    n.show()
+    time.sleep(3)
+
+
+# send SMS in case of any update
+def sendSMS(message2, inset):
     for number in numberlist:
         cj = cookielib.CookieJar()
         opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
@@ -64,12 +69,21 @@ def sendSMS(inset):
 
 # check for new updates
 def checkForUpdate(mylist):
-    # get difference in mylist and 
+    # get difference in mylist and
     # titlelist for updates
     s = set(titlelist)
     temp3 = [x for x in mylist if x not in s]
     if len(temp3) is not 0:
-        sendSMS(temp3)
+        # convert it into string message
+        inlist = list(temp3)
+        message2 = ''
+        inlistLen = len(inlist)
+        for i in range(2):
+            if i < inlistLen:
+                message2 = message2 + '\n' + str(inlist[i].encode('utf-8'))
+        # send updates to mobile and desktop
+        sendSMS(message2, temp3)
+        desktopNotify(message2)
     else:
         print ("no updates recently!")
 
@@ -85,7 +99,7 @@ def loginToWebsite(sc):
     resp = opener.open('http://aitplacements.com/news/')
     # print (resp.read())
     doc = html.fromstring(resp.read())
-    # print html.tostring(doc, pretty_print=True)
+    # print (html.tostring(doc, pretty_print=True))
     raw_title = doc.xpath('//h1[@class="entry-title"]/a/text()')
     # print (raw_title)
     checkForUpdate(raw_title)
